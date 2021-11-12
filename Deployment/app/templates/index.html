@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TMDB</title>
+</head>
+
+<body>
+    {% extends "bootstrap/base.html" %}
+    {% import "bootstrap/wtf.html" as wtf %}
+    {% block title %}HospitalApp{% endblock %}
+    {% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">TMDBBoxOfficePredictionApp</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block content %}
+
+    <div class='container'>
+        <p>Predict a movies revenue by filling out the information below.</p>
+    </div>
+
+    <div class='container'>{{ wtf.quick_form(form) }}</div>
+
+    <div class='container'>
+
+        <h3>{% if session.get('pred') %} The machine learnging model predicted a revenue of
+            {{session.get('pred')}}$ for this movie {% else %} {% endif%}</h3>
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>
